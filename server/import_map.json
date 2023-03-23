@@ -2,6 +2,7 @@
   "imports": {
     "~/":"./src/",
     "$std/": "https://deno.land/std@0.181.0/",
-    "opine": "https://deno.land/x/opine@2.2.0/mod.ts"
+    "opine": "https://deno.land/x/opine@2.2.0/mod.ts",
+    "cors": "https://deno.land/x/cors@v1.2.2/mod.ts"
   }
 }
