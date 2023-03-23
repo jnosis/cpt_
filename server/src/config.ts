@@ -1,6 +1,6 @@
 import '$std/dotenv/load.ts';
 import type { CorsOptions } from 'cors';
-import type { Config, RateLimitOptions } from '~/types.ts';
+import type { Config, MongodbOptions, RateLimitOptions } from '~/types.ts';
 
 function required(key: string, defaultValue?: string): string {
   const value = Deno.env.get(key) || defaultValue;
@@ -14,6 +14,11 @@ const cors: CorsOptions = {
   origin: new RegExp(required('CORS_ALLOW_ORIGIN')),
 };
 
+const mongodb: MongodbOptions = {
+  name: required('MONGODB_NAME')!,
+  host: required('MONGODB_HOST')!,
+};
+
 const rateLimit: RateLimitOptions = {
   windowMs: parseInt(required('RATE_LIMIT_WINDOW_MS', '60000')),
   maxRequest: parseInt(required('RATE_LIMIT_MAX_REQUEST', '100')),
@@ -21,6 +26,7 @@ const rateLimit: RateLimitOptions = {
 
 const config: Config = {
   cors,
+  mongodb,
   rateLimit,
 };
 
