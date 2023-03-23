@@ -1,6 +1,6 @@
 import '$std/dotenv/load.ts';
 import type { CorsOptions } from 'cors';
-import type { BcryptOptions, Config, MongodbOptions, RateLimitOptions } from '~/types.ts';
+import type { BcryptOptions, Config, JwtOptions, MongodbOptions, RateLimitOptions } from '~/types.ts';
 
 function required(key: string, defaultValue?: string): string {
   const value = Deno.env.get(key) || defaultValue;
@@ -18,6 +18,11 @@ const cors: CorsOptions = {
   origin: new RegExp(required('CORS_ALLOW_ORIGIN')),
 };
 
+const jwt: JwtOptions = {
+  secretKey: required('JWT_SECRET_KEY'),
+  expiresInSec: parseInt(required('JWT_EXPIRES_IN_SEC', '86400')),
+}
+
 const mongodb: MongodbOptions = {
   name: required('MONGODB_NAME')!,
   host: required('MONGODB_HOST')!,
@@ -31,6 +36,7 @@ const rateLimit: RateLimitOptions = {
 const config: Config = {
   bcrypt,
   cors,
+  jwt,
   mongodb,
   rateLimit,
 };

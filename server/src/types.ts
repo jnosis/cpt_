@@ -5,6 +5,11 @@ export type BcryptOptions = {
   saltRound: number;
 };
 
+export type JwtOptions = {
+  secretKey: string;
+  expiresInSec: number;
+}
+
 export type MongodbOptions = {
   name: string;
   host: string;
@@ -18,6 +23,7 @@ export type RateLimitOptions = {
 export type Config = {
   bcrypt: BcryptOptions;
   cors: CorsOptions;
+  jwt: JwtOptions;
   mongodb: MongodbOptions;
   rateLimit: RateLimitOptions;
 };
