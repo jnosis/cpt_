@@ -1,6 +1,7 @@
 import { type CorsOptions, opineCors } from 'cors';
 import { json, opine } from 'opine';
 import { elmedenoMiddleware } from '~/middleware/elmedeno.ts';
+import log from '~/util/logger.ts';
 import config from '~/config.ts';
 
 const { cors } = config;
@@ -22,5 +23,5 @@ app.get('/', (_req, res) => {
 });
 
 app.listen({ port: 3000 }, () => {
-  console.log(`Server is started...`);
+  log.info(`Server is started...`);
 });
