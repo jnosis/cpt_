@@ -1,5 +1,6 @@
 import { type CorsOptions, opineCors } from 'cors';
 import { json, opine } from 'opine';
+import { elmedenoMiddleware } from '~/middleware/elmedeno.ts';
 import config from '~/config.ts';
 
 const { cors } = config;
@@ -13,6 +14,7 @@ const corsOptions: CorsOptions = {
 };
 
 app.use(json());
+app.use(elmedenoMiddleware);
 app.use(opineCors(corsOptions));
 
 app.get('/', (_req, res) => {
