@@ -1,9 +1,10 @@
 {
   "imports": {
-    "~/":"./src/",
+    "~/": "./src/",
     "$std/": "https://deno.land/std@0.181.0/",
     "opine": "https://deno.land/x/opine@2.2.0/mod.ts",
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
-    "elmedeno/": "https://deno.land/x/elmedeno@1.0.1/"
+    "elmedeno/": "https://deno.land/x/elmedeno@1.0.1/",
+    "express-rate-limit": "https://esm.sh/express-rate-limit@6.7.0"
   }
 }
