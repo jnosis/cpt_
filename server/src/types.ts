@@ -1,6 +1,10 @@
 import type { CorsOptions } from 'cors';
 import type { ObjectId } from 'mongo';
 
+export type BcryptOptions = {
+  saltRound: number;
+};
+
 export type MongodbOptions = {
   name: string;
   host: string;
@@ -12,6 +16,7 @@ export type RateLimitOptions = {
 };
 
 export type Config = {
+  bcrypt: BcryptOptions;
   cors: CorsOptions;
   mongodb: MongodbOptions;
   rateLimit: RateLimitOptions;

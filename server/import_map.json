@@ -3,6 +3,7 @@
     "~/": "./src/",
     "$std/": "https://deno.land/std@0.181.0/",
     "opine": "https://deno.land/x/opine@2.2.0/mod.ts",
+    "bcrypt": "https://deno.land/x/bcrypt@v0.4.1/mod.ts",
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
     "elmedeno/": "https://deno.land/x/elmedeno@1.0.1/",
     "express-list-endpoints": "https://esm.sh/express-list-endpoints@6.0.0",
