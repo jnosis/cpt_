@@ -8,7 +8,7 @@ export type BcryptOptions = {
 export type JwtOptions = {
   secretKey: string;
   expiresInSec: number;
-}
+};
 
 export type MongodbOptions = {
   name: string;
