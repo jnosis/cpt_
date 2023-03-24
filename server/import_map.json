@@ -9,6 +9,7 @@
     "elmedeno/": "https://deno.land/x/elmedeno@1.0.1/",
     "express-list-endpoints": "https://esm.sh/express-list-endpoints@6.0.0",
     "express-rate-limit": "https://esm.sh/express-rate-limit@6.7.0",
-    "mongo": "https://deno.land/x/mongo@v0.31.2/mod.ts"
+    "mongo": "https://deno.land/x/mongo@v0.31.2/mod.ts",
+    "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
   }
 }
