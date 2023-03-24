@@ -12,6 +12,7 @@
   "importMap": "./import_map.json",
   "tasks": {
     "start": "deno run --allow-net --allow-env --allow-read --watch ./src/app.ts",
-    "test": "deno test --allow-net --allow-env --allow-read --quiet --watch ./src -- test"
+    "test": "deno test --allow-net --allow-env --allow-read --quiet --watch ./src -- test",
+    "coverage": "deno test --coverage=./coverage --allow-net --allow-env --allow-read --quiet -- test && deno coverage ./coverage"
   }
 }
