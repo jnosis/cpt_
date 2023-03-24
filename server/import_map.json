@@ -10,6 +10,9 @@
     "express-list-endpoints": "https://esm.sh/express-list-endpoints@6.0.0",
     "express-rate-limit": "https://esm.sh/express-rate-limit@6.7.0",
     "mongo": "https://deno.land/x/mongo@v0.31.2/mod.ts",
-    "zod": "https://deno.land/x/zod@v3.21.4/mod.ts"
+    "zod": "https://deno.land/x/zod@v3.21.4/mod.ts",
+    "faker": "https://cdn.skypack.dev/@faker-js/faker@v7.6.0",
+    "superdeno": "https://deno.land/x/superdeno@4.8.0/mod.ts",
+    "testing/": "https://deno.land/std@0.181.0/testing/"
   }
 }
