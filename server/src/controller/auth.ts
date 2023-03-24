@@ -65,7 +65,7 @@ export class UserController implements IUserController {
     log.debug(msg);
 
     setToken(res, token);
-    res.setStatus(201).json({ token, username });
+    res.setStatus(201).json({ token, username, userId });
   };
 
   login = async (req: OpineRequest, res: OpineResponse<AuthToken>) => {
@@ -99,7 +99,7 @@ export class UserController implements IUserController {
     log.debug(msg);
 
     setToken(res, token);
-    res.setStatus(200).json({ token, username });
+    res.setStatus(200).json({ token, username, userId: user.id });
   };
 
   logout = (req: OpineRequest, res: OpineResponse) => {
@@ -133,7 +133,11 @@ export class UserController implements IUserController {
       status: 200,
     });
     log.debug(msg);
-    res.setStatus(200).json({ token: req.body.token, username: user.username });
+    res.setStatus(200).json({
+      token: req.body.token,
+      username: user.username,
+      userId: user.id,
+    });
   };
 }
 

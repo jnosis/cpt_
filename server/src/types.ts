@@ -41,6 +41,7 @@ export type UserSignupData = Omit<UserData, 'id'>;
 export type AuthToken = {
   token: string;
   username: string;
+  userId: string;
 };
 
 interface Model<Schema, Input, Data> {
