@@ -20,7 +20,7 @@ export class UserController implements IUserController {
 
   getList = async (
     req: OpineRequest,
-    res: OpineResponse<Omit<UserData, 'password'>>,
+    res: OpineResponse<Omit<UserData, 'password'>[]>,
   ) => {
     const { method, baseUrl } = req;
     const users = (await this.#userRepository.getAll()).map((user) => {
@@ -34,7 +34,7 @@ export class UserController implements IUserController {
       status: 200,
     });
     log.debug(msg);
-    res.setStatus(200).json(users[0]);
+    res.setStatus(200).json(users);
   };
 
   signup = async (req: OpineRequest, res: OpineResponse<AuthToken>) => {

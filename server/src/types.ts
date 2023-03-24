@@ -69,7 +69,7 @@ export interface UserModel extends Model<UserSchema, UserSignupData, UserData> {
 }
 
 export interface IUserController {
-  getList: RequestHandler<ParamsDictionary, Omit<UserData, 'password'>>;
+  getList: RequestHandler<ParamsDictionary, Omit<UserData, 'password'>[]>;
   signup: RequestHandler<ParamsDictionary, AuthToken>;
   login: RequestHandler<ParamsDictionary, AuthToken>;
   logout: RequestHandler;
