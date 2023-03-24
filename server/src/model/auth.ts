@@ -50,7 +50,11 @@ class UserRepository implements UserModel {
 }
 
 function mapOptionalData(data?: UserSchema): UserData | undefined {
-  return data ? { ...data, id: data._id.toString() } : data;
+  if (data) {
+    const { _id, ...user } = data;
+    return { ...user, id: data._id.toString() };
+  }
+  return data;
 }
 
 export const userRepository = new UserRepository(repository);
