@@ -44,8 +44,28 @@ export type AuthToken = {
   userId: string;
 };
 
+export type Sentiment = 'positive' | 'negative' | 'neutral';
+
+export type ChatData = {
+  roomId: string;
+  userId: string;
+  message: string;
+  sentiment: Sentiment;
+  created_at: string;
+};
+
+export type RoomData = {
+  id: string;
+  title: string;
+  users: Omit<UserData, 'password'>[];
+  chats: ChatData[];
+};
+
+export type RoomCreateData = Omit<RoomData, 'id' | 'chats'>;
+
 interface Model<Schema, Input, Data> {
   getAll(): Promise<Data[]>;
+  findById(id: string): Promise<Data | undefined>;
   create(input: Input): Promise<(Data | undefined) | string>;
   update(
     key: string,
@@ -64,7 +84,6 @@ export interface UserSchema {
 
 export interface UserModel extends Model<UserSchema, UserSignupData, UserData> {
   findByUsername(username: string): Promise<UserData | undefined>;
-  findById(id: string): Promise<UserData | undefined>;
   create(user: UserSignupData): Promise<string>;
 }
 
@@ -74,4 +93,20 @@ export interface IUserController {
   login: RequestHandler<ParamsDictionary, AuthToken>;
   logout: RequestHandler;
   me: RequestHandler<ParamsDictionary, AuthToken>;
+}
+
+export interface RoomSchema {
+  _id: ObjectId;
+  title: string;
+  users: Omit<UserData, 'password'>[];
+  chats: ChatData[];
+}
+
+export interface RoomModel extends Model<RoomSchema, RoomCreateData, RoomData> {
+  getAll(userId?: string): Promise<RoomData[]>;
+  send(
+    roomId: string,
+    userId: string,
+    message: string,
+  ): Promise<ChatData | undefined>;
 }
