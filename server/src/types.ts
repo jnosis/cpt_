@@ -104,9 +104,19 @@ export interface RoomSchema {
 
 export interface RoomModel extends Model<RoomSchema, RoomCreateData, RoomData> {
   getAll(userId?: string): Promise<RoomData[]>;
+  create(room: RoomCreateData): Promise<RoomData | undefined>;
   send(
     roomId: string,
     userId: string,
     message: string,
   ): Promise<ChatData | undefined>;
+}
+
+export interface IRoomController {
+  getList: RequestHandler<ParamsDictionary, RoomData[]>;
+  getById: RequestHandler<ParamsDictionary, RoomData>;
+  create: RequestHandler<ParamsDictionary, RoomData>;
+  update: RequestHandler<ParamsDictionary, RoomData>;
+  delete: RequestHandler;
+  send: RequestHandler<ParamsDictionary, ChatData>;
 }
