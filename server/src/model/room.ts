@@ -36,7 +36,7 @@ class RoomRepository implements RoomModel {
   async create(room: RoomCreateData) {
     return await this.#room.insertOne({ ...room, chats: [] }).then((
       insertedId,
-    ) => insertedId.toString());
+    ) => mapOptionalData({ ...room, chats: [], _id: insertedId }));
   }
 
   async update(id: string, room: RoomCreateData) {
