@@ -9,7 +9,11 @@ const router = Router();
 
 const validateRoom = validate({
   title: z.string().min(1, { message: 'Title should be not empty' }),
-  users: z.string().array().min(1, { message: 'Users should be at least one' }),
+  users: z.object({
+    id: z.string(),
+    username: z.string(),
+    email: z.string().email(),
+  }).array().min(1, { message: 'Users should be at least one' }),
 });
 
 const validateChat = validate({
