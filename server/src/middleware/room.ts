@@ -16,35 +16,28 @@ export const isInRoom = async (
   const roomId = req.params.id;
   const userId = req.body.userId;
 
-  try {
-    if (!roomId) {
-      return throwError({
-        method,
-        baseUrl: originalUrl,
-        ...AUTH_ERROR,
-      });
-    }
-    const room = await roomRepository.findById(roomId);
-    if (!room) {
-      return throwError({
-        method,
-        baseUrl: originalUrl,
-        ...AUTH_ERROR,
-      });
-    }
-    if (!room.users.map((users) => users.id).includes(userId)) {
-      return throwError({
-        method,
-        baseUrl: originalUrl,
-        ...AUTH_ERROR,
-      });
-    }
-    next();
-  } catch (_e) {
+  if (!roomId) {
     return throwError({
       method,
       baseUrl: originalUrl,
       ...AUTH_ERROR,
     });
   }
+  const room = await roomRepository.findById(roomId);
+  if (!room) {
+    return throwError({
+      method,
+      baseUrl: originalUrl,
+      status: 404,
+      message: `Room id(${roomId}) not found`,
+    });
+  }
+  if (!room.users.map((users) => users.id).includes(userId)) {
+    return throwError({
+      method,
+      baseUrl: originalUrl,
+      ...AUTH_ERROR,
+    });
+  }
+  next();
 };
