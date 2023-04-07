@@ -49,7 +49,7 @@ class RoomRepository implements RoomModel {
   }
 
   async remove(id: string) {
-    return await this.#room.deleteOne({ id });
+    return await this.#room.deleteOne({ _id: new ObjectId(id) });
   }
 
   async send(roomId: string, userId: string, message: string) {
