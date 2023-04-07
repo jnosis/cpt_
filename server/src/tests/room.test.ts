@@ -20,6 +20,7 @@ import {
   createNewRooms,
   makeRoomDetails,
 } from '~/tests/room_utils.ts';
+import { ChatData } from '../types.ts';
 
 describe('Room APIs', () => {
   let app: Opine;
@@ -245,14 +246,74 @@ describe('Room APIs', () => {
       assertEquals(response.body.message, 'Message should be not empty');
     });
 
-    it('returns 201 and sent chat data', async () => {
+    it('returns 201 and sent chat data when message is neutral', async () => {
       const { token, rooms, user } = await createNewRooms(request);
       const room = rooms[0];
-      const chat = {
+      const chat: Omit<ChatData, 'created_at'> = {
         roomId: room.id,
         userId: user.id,
         message: faker.lorem.sentence(),
         sentiment: 'neutral',
+      };
+
+      const response = await request.post(`/room/${room.id}`).set({
+        Authorization: `Bearer ${token}`,
+      }).send({ message: chat.message });
+      const {
+        roomId,
+        userId,
+        message,
+        sentiment,
+      } = response.body;
+      const sent = {
+        roomId,
+        userId,
+        message,
+        sentiment,
+      };
+
+      assertEquals(response.status, 201);
+      assertEquals({ ...sent }, { ...chat });
+    });
+
+    it('returns 201 and sent chat data when message is positive', async () => {
+      const { token, rooms, user } = await createNewRooms(request);
+      const room = rooms[0];
+      const chat: Omit<ChatData, 'created_at'> = {
+        roomId: room.id,
+        userId: user.id,
+        message: 'love you',
+        sentiment: 'positive',
+      };
+
+      const response = await request.post(`/room/${room.id}`).set({
+        Authorization: `Bearer ${token}`,
+      }).send({ message: chat.message });
+      const {
+        roomId,
+        userId,
+        message,
+        sentiment,
+      } = response.body;
+      const sent = {
+        roomId,
+        userId,
+        message,
+        sentiment,
+      };
+
+      assertEquals(response.status, 201);
+      assertEquals({ ...sent }, { ...chat });
+    });
+
+    it('returns 201 and sent chat data when message is negative', async () => {
+      const { token, rooms, user } = await createNewRooms(request);
+      const room = rooms[0];
+      const chat: Omit<ChatData, 'created_at'> = {
+        roomId: room.id,
+        userId: user.id,
+        message: 'hate you',
+        sentiment: 'negative',
       };
 
       const response = await request.post(`/room/${room.id}`).set({
