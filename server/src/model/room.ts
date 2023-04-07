@@ -80,7 +80,7 @@ function mapOptionalData(data?: RoomSchema): RoomData | undefined {
 function getLastChat(data?: RoomSchema): ChatData | undefined {
   if (data) {
     const { chats } = data;
-    return chats[-1];
+    return chats.findLast((chat) => !!chat);
   }
   return data;
 }
