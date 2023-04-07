@@ -113,7 +113,7 @@ export interface RoomModel extends Model<RoomSchema, RoomCreateData, RoomData> {
   send(
     roomId: string,
     userId: string,
-    message: string,
+    chat: { message: string; sentiment: Sentiment },
   ): Promise<ChatData | undefined>;
 }
 

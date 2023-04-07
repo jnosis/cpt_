@@ -6,6 +6,7 @@ import type {
   RoomData,
   RoomModel,
   RoomSchema,
+  Sentiment,
 } from '~/types.ts';
 import mongodb from '~/mongodb.ts';
 
@@ -52,14 +53,19 @@ class RoomRepository implements RoomModel {
     return await this.#room.deleteOne({ _id: new ObjectId(id) });
   }
 
-  async send(roomId: string, userId: string, message: string) {
+  async send(
+    roomId: string,
+    userId: string,
+    chat: { message: string; sentiment: Sentiment },
+  ) {
+    const { message, sentiment } = chat;
     return await this.#room.updateOne({ _id: new ObjectId(roomId) }, {
       $push: {
         chats: {
           roomId,
           userId,
           message,
-          sentiment: 'neutral',
+          sentiment,
           created_at: (new Date()).toISOString(),
         },
       },

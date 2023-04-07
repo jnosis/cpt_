@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { IRoomController } from '~/types.ts';
 import { isAuth } from '~/middleware/auth.ts';
 import { isInRoom } from '~/middleware/room.ts';
+import { classifySentiment } from '~/middleware/sentiment.ts';
 import { validate } from '~/middleware/validator.ts';
 
 const router = Router();
@@ -24,7 +25,14 @@ export default function authRouter(roomController: IRoomController) {
   router.get('/', isAuth, roomController.getList);
   router.get('/:id', isAuth, isInRoom, roomController.getById);
   router.post('/', isAuth, validateRoom, roomController.create);
-  router.post('/:id', isAuth, isInRoom, validateChat, roomController.send);
+  router.post(
+    '/:id',
+    isAuth,
+    isInRoom,
+    validateChat,
+    classifySentiment,
+    roomController.send,
+  );
   router.put('/:id', isAuth, isInRoom, validateRoom, roomController.update);
   router.delete('/:id', isAuth, isInRoom, roomController.delete);
 
