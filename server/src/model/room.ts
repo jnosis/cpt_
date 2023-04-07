@@ -40,9 +40,12 @@ class RoomRepository implements RoomModel {
   }
 
   async update(id: string, room: RoomCreateData) {
-    return await this.#room.updateOne({ id }, { $set: room }).then(
-      async () => await this.#room.findOne({ id }).then(mapOptionalData),
-    );
+    return await this.#room.updateOne({ _id: new ObjectId(id) }, { $set: room })
+      .then(async () =>
+        await this.#room.findOne({ _id: new ObjectId(id) }).then(
+          mapOptionalData,
+        )
+      );
   }
 
   async remove(id: string) {
@@ -50,7 +53,7 @@ class RoomRepository implements RoomModel {
   }
 
   async send(roomId: string, userId: string, message: string) {
-    return await this.#room.updateOne({ id: roomId }, {
+    return await this.#room.updateOne({ _id: new ObjectId(roomId) }, {
       $push: {
         chats: {
           roomId,
@@ -60,8 +63,8 @@ class RoomRepository implements RoomModel {
           created_at: (new Date()).toISOString(),
         },
       },
-    }).then(async ({ upsertedId }) =>
-      await this.#room.findOne({ id: upsertedId }).then(getLastChat)
+    }).then(async () =>
+      await this.#room.findOne({ _id: new ObjectId(roomId) }).then(getLastChat)
     );
   }
 }
