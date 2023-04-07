@@ -5,6 +5,7 @@ import type {
   Config,
   JwtOptions,
   MongodbOptions,
+  OpenAiOptions,
   RateLimitOptions,
 } from '~/types.ts';
 
@@ -36,6 +37,10 @@ const mongodb: MongodbOptions = {
   host: required('MONGODB_HOST')!,
 };
 
+const openai: OpenAiOptions = {
+  apiKey: required('OPENAI_API_KEY'),
+};
+
 const rateLimit: RateLimitOptions = {
   windowMs: parseInt(required('RATE_LIMIT_WINDOW_MS', '60000')),
   maxRequest: parseInt(required('RATE_LIMIT_MAX_REQUEST', '100')),
@@ -46,6 +51,7 @@ const config: Config = {
   cors,
   jwt,
   mongodb,
+  openai,
   rateLimit,
 };
 
