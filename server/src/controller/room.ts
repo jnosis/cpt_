@@ -103,7 +103,7 @@ export class RoomController implements IRoomController {
     const room = await this.#roomRepository.findById(id);
 
     if (!room) {
-      return throwError({
+      throwError({
         method,
         baseUrl,
         param: id,
@@ -120,7 +120,7 @@ export class RoomController implements IRoomController {
       status: 204,
     });
     log.debug(msg);
-    res.setStatus(204);
+    res.setStatus(204).end();
   };
 
   send = async (req: OpineRequest, res: OpineResponse<ChatData>) => {
