@@ -1,11 +1,11 @@
 import { OpenAI } from 'openai';
 import config from '~/config.ts';
 
-const apiKey = config.openai.apiKey;
+const apiKey = config.openAi.apiKey;
 
 const client = new OpenAI(apiKey);
 
-const openai = {
+const openAi = {
   async classifySentiment(text: string) {
     return await client.createCompletion({
       model: 'davinci',
@@ -21,4 +21,4 @@ const openai = {
   },
 };
 
-export default openai;
+export default openAi;

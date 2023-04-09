@@ -37,7 +37,7 @@ const mongodb: MongodbOptions = {
   host: required('MONGODB_HOST')!,
 };
 
-const openai: OpenAiOptions = {
+const openAi: OpenAiOptions = {
   apiKey: required('OPENAI_API_KEY'),
 };
 
@@ -51,7 +51,7 @@ const config: Config = {
   cors,
   jwt,
   mongodb,
-  openai,
+  openAi,
   rateLimit,
 };
 

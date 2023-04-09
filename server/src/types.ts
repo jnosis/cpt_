@@ -30,7 +30,7 @@ export type Config = {
   cors: CorsOptions;
   jwt: JwtOptions;
   mongodb: MongodbOptions;
-  openai: OpenAiOptions;
+  openAi: OpenAiOptions;
   rateLimit: RateLimitOptions;
 };
 

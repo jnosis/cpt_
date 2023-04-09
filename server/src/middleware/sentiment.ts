@@ -1,6 +1,6 @@
 import type { NextFunction, OpineRequest, OpineResponse } from 'opine';
 import type { Sentiment } from '~/types.ts';
-import openai from '~/openai.ts';
+import openAi from '~/openai.ts';
 
 export const classifySentiment = async (
   req: OpineRequest,
@@ -9,7 +9,7 @@ export const classifySentiment = async (
 ) => {
   const message = req.body.message;
 
-  const { choices } = await openai.classifySentiment(message);
+  const { choices } = await openAi.classifySentiment(message);
   const { text } = choices[0];
 
   req.body.chat = {
