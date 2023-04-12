@@ -8,7 +8,7 @@ const client = new OpenAI(apiKey);
 const openAi = {
   async classifySentiment(text: string) {
     return await client.createCompletion({
-      model: 'davinci',
+      model: 'text-davinci-003',
       prompt:
         `What is the sentiment of the following text?\n"${text}"\nSentiment:`,
       maxTokens: 1,
