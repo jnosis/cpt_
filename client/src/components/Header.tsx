@@ -1,7 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../contexts/AuthContext';
 
 export function Header() {
+  const { user, logout } = useAuthContext();
+
   return (
     <header className='flex justify-between items-center p-2'>
       <Link to='/'>
@@ -9,8 +11,15 @@ export function Header() {
       </Link>
       {/* TODO: Make User and Button Components */}
       <nav className='flex gap-4'>
-        <div>USER</div>
-        <button>Login|Logout</button>
+        {user && <div>{user.username[0].toUpperCase()}</div>}
+        {!user
+          ? (
+            <>
+              <Link to='/signin'>Sign in</Link>
+              <Link to='/signup'>Sign up</Link>
+            </>
+          )
+          : <button onClick={logout}>Logout</button>}
       </nav>
     </header>
   );
