@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../contexts/AuthContext';
+import User from './User';
 
 export function Header() {
   const { user, logout } = useAuthContext();
@@ -9,17 +10,17 @@ export function Header() {
       <Link to='/'>
         <h1>CPT</h1>
       </Link>
-      {/* TODO: Make User and Button Components */}
+      {/* TODO: Make Button Component */}
       <nav className='flex gap-4'>
-        {user && <div>{user.username[0].toUpperCase()}</div>}
-        {!user
-          ? (
-            <>
-              <Link to='/signin'>Sign in</Link>
-              <Link to='/signup'>Sign up</Link>
-            </>
-          )
-          : <button onClick={logout}>Logout</button>}
+        {user && <User user={user} />}
+        {!user ? (
+          <>
+            <Link to='/signin'>Sign in</Link>
+            <Link to='/signup'>Sign up</Link>
+          </>
+        ) : (
+          <button onClick={logout}>Logout</button>
+        )}
       </nav>
     </header>
   );
