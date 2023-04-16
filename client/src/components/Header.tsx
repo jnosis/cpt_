@@ -13,14 +13,14 @@ export function Header() {
       {/* TODO: Make Button Component */}
       <nav className='flex gap-4'>
         {user && <User user={user} />}
-        {!user ? (
-          <>
-            <Link to='/signin'>Sign in</Link>
-            <Link to='/signup'>Sign up</Link>
-          </>
-        ) : (
-          <button onClick={logout}>Logout</button>
-        )}
+        {!user
+          ? (
+            <>
+              <Link to='/signin'>Sign in</Link>
+              <Link to='/signup'>Sign up</Link>
+            </>
+          )
+          : <button onClick={logout}>Logout</button>}
       </nav>
     </header>
   );

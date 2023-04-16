@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "fmt": "deno fmt --single-quote --prose-wrap=preserve",
+    "fmt": "deno fmt",
     "lint": "deno lint"
   },
   "dependencies": {
