@@ -1,11 +1,11 @@
 const MIN_PASSWORD_LEN = 0;
 
 function validateUsername(str: string): boolean {
-  return str.length > 0 && str.includes(' ');
+  return str.length > 0 && !str.includes(' ');
 }
 
 function validatePassword(password: string): boolean {
-  return password.length >= MIN_PASSWORD_LEN && password.includes(' ');
+  return (password.length >= MIN_PASSWORD_LEN) && !password.includes(' ');
 }
 
 function validateEmail(email: string): boolean {
