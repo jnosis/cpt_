@@ -17,6 +17,7 @@ import type {
 
 type AuthContextType = {
   user: AuthToken | null;
+  getList(): Promise<Omit<UserInfo, 'password'>[]>;
   signup(user: SignUpInfo): Promise<void>;
   login(loginInfo: LoginInfo): Promise<void>;
   logout(): Promise<void>;
@@ -24,6 +25,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  getList: async () => [],
   signup: async () => {},
   login: async () => {},
   logout: async () => {},
@@ -51,6 +53,10 @@ export function AuthContextProvider({ authApi, children }: AuthContextProps) {
       .catch(() => handleToken(null));
   }, [user]);
 
+  const getList = useCallback(async () => {
+    return await authApi.getList();
+  }, []);
+
   const signup = useCallback(async (user: UserInfo) => {
     const token = await authApi.signup(user);
     setUser(token);
@@ -67,8 +73,8 @@ export function AuthContextProvider({ authApi, children }: AuthContextProps) {
   }, []);
 
   const context = useMemo(
-    () => ({ user, signup, login, logout }),
-    [user, signup, login, logout],
+    () => ({ user, getList, signup, login, logout }),
+    [user, getList, signup, login, logout],
   );
 
   return <AuthContext.Provider value={context}>{children}
