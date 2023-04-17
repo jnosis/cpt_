@@ -4,12 +4,20 @@ import type {
   IHttpClient,
   LoginInfo,
   SignUpInfo,
+  UserInfo,
 } from '../types';
 
 export default class AuthApi implements IAuthApi {
   #http: IHttpClient;
   constructor(http: IHttpClient) {
     this.#http = http;
+  }
+
+  async getList(): Promise<Omit<UserInfo, 'password'>[]> {
+    return await this.#http.fetch<Omit<UserInfo, 'password'>[]>(
+      '/api/auth/list',
+      { method: 'GET' },
+    );
   }
 
   async signup(user: SignUpInfo): Promise<AuthToken> {

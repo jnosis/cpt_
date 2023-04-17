@@ -3,6 +3,7 @@ export interface IHttpClient {
 }
 
 export interface IAuthApi {
+  getList(): Promise<Omit<UserInfo, 'password'>[]>;
   signup(user: SignUpInfo): Promise<AuthToken>;
   login(loginInfo: LoginInfo): Promise<AuthToken>;
   logout(): Promise<void>;
