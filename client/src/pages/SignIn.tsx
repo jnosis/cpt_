@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { LoginInfo } from '../types';
+import type { LoginInfo, Validation } from '../types';
 import { useAuthContext } from '../contexts/AuthContext';
 import { validateUser } from '../utils/validator';
 
-type LoginInfoValidation = {
-  username: boolean;
-  password: boolean;
-};
+type LoginInfoValidation = Validation<LoginInfo>;
 
 const initialLoginInfo: LoginInfo = {
   username: '',
@@ -29,7 +26,7 @@ export default function SignIn() {
     const { name, value } = e.target;
     setValidation((validation) => ({
       ...validation,
-      [name]: validateUser(name, value),
+      [name]: validateUser(name as keyof LoginInfo, value),
     }));
     setLoginInfo((loginInfo) => ({ ...loginInfo, [name]: value }));
   };

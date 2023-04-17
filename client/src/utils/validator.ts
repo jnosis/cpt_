@@ -1,3 +1,5 @@
+import { SignUpInfo } from '../types';
+
 const MIN_PASSWORD_LEN = 0;
 
 function validateUsername(str: string): boolean {
@@ -13,7 +15,7 @@ function validateEmail(email: string): boolean {
   return emailRegExp.test(email);
 }
 
-export function validateUser(name: string, value: string): boolean {
+export function validateUser(name: keyof SignUpInfo, value: string): boolean {
   switch (name) {
     case 'username':
       return validateUsername(value);

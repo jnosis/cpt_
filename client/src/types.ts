@@ -54,3 +54,5 @@ export type RoomInfo = {
 };
 
 export type RoomCreateInfo = Omit<RoomInfo, 'id' | 'chats'>;
+
+export type Validation<Type> = { [name in keyof Type]: boolean };
