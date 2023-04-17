@@ -25,3 +25,31 @@ export type AuthToken = {
   username: string;
   userId: string;
 };
+
+export interface IRoomApi {
+  getList(): Promise<RoomInfo[]>;
+  getRoom(roomId: string): Promise<RoomInfo | null>;
+  create(room: RoomCreateInfo): Promise<RoomInfo>;
+  update(roomId: string, updated: RoomCreateInfo): Promise<RoomInfo>;
+  remove(roomId: string): Promise<void>;
+  sendChat(roomId: string, message: string): Promise<ChatInfo>;
+}
+
+export type Sentiment = 'positive' | 'negative' | 'neutral';
+
+export type ChatInfo = {
+  roomId: string;
+  userId: string;
+  message: string;
+  sentiment: Sentiment;
+  created_at: string;
+};
+
+export type RoomInfo = {
+  id: string;
+  title: string;
+  users: Omit<UserInfo, 'password'>[];
+  chats: ChatInfo[];
+};
+
+export type RoomCreateInfo = Omit<RoomInfo, 'id' | 'chats'>;
