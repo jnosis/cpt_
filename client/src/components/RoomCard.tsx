@@ -10,7 +10,7 @@ export default function RoomCard(
   return (
     <li>
       <h3>{title}</h3>
-      <span>{users.join(', ')}</span>
+      <span>{users.map((user) => user.username).join(', ')}</span>
       <span>{getLastChat(chats)}</span>
     </li>
   );
