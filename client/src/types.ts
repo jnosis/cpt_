@@ -31,7 +31,7 @@ export interface IRoomApi {
   getRoom(roomId: string): Promise<RoomInfo | null>;
   create(room: RoomCreateInfo): Promise<RoomInfo>;
   update(roomId: string, updated: RoomCreateInfo): Promise<RoomInfo>;
-  remove(roomId: string): Promise<void>;
+  remove(roomId: string): Promise<string>;
   sendChat(roomId: string, message: string): Promise<ChatInfo>;
 }
 

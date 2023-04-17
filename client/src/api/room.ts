@@ -36,10 +36,11 @@ export default class RoomApi implements IRoomApi {
     });
   }
 
-  async remove(roomId: string): Promise<void> {
-    return await this.#http.fetch<void>(`/api/room/${roomId}`, {
+  async remove(roomId: string): Promise<string> {
+    await this.#http.fetch<void>(`/api/room/${roomId}`, {
       method: 'DELETE',
     });
+    return roomId;
   }
 
   async sendChat(roomId: string, message: string): Promise<ChatInfo> {
