@@ -1,4 +1,4 @@
-import { SignUpInfo } from '../types';
+import { RoomCreateInfo, SignUpInfo, UserInfo } from '../types';
 
 const MIN_PASSWORD_LEN = 0;
 
@@ -25,5 +25,27 @@ export function validateUser(name: keyof SignUpInfo, value: string): boolean {
       return validateEmail(value);
     default:
       throw new Error(`User property(${name}) is undefined`);
+  }
+}
+
+function validateTitle(str: string) {
+  return str.trim().length > 0;
+}
+
+function validateUsers(users: Omit<UserInfo, 'password'>[]) {
+  return users.length > 0;
+}
+
+export function validateRoom(
+  name: keyof RoomCreateInfo,
+  value: string | Omit<UserInfo, 'password'>[],
+) {
+  switch (name) {
+    case 'title':
+      return validateTitle(value as string);
+    case 'users':
+      return validateUsers(value as Omit<UserInfo, 'password'>[]);
+    default:
+      throw new Error(`Room property(${name}) is undefined`);
   }
 }
