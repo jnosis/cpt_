@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ChatBubble from '../components/ChatBubble';
+import { useAuthContext } from '../contexts/AuthContext';
 import useRooms from '../hooks/useRooms';
 
 export default function Room() {
   const { id } = useParams();
+  const { user } = useAuthContext();
   const { roomQuery, sendMessage } = useRooms();
   const { data: room } = roomQuery(id || '');
 
@@ -37,7 +40,11 @@ export default function Room() {
           <section>
             <ul>
               {room.chats.map((chat) => (
-                <li key={chat.created_at}>{chat.message}</li>
+                <ChatBubble
+                  key={chat.created_at}
+                  chat={chat}
+                  isSender={user?.userId === chat.userId}
+                />
               ))}
             </ul>
             <form onSubmit={handleSendMessage}>
