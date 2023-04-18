@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatBubble from '../components/ChatBubble';
+import SendMessage from '../components/SendMessage';
 import { useAuthContext } from '../contexts/AuthContext';
 import useRooms from '../hooks/useRooms';
 
@@ -10,23 +10,14 @@ export default function Room() {
   const { roomQuery, sendMessage } = useRooms();
   const { data: room } = roomQuery(id || '');
 
-  const [message, setMessage] = useState<string>('');
-
   const navigate = useNavigate();
 
   const handleBack = () => {
     navigate('/');
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setMessage(value);
-  };
-
-  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSendMessage = (message: string) => {
     sendMessage.mutate({ roomId: id ?? '', message });
-    setMessage('');
   };
 
   return (
@@ -47,16 +38,7 @@ export default function Room() {
                 />
               ))}
             </ul>
-            <form onSubmit={handleSendMessage}>
-              <input
-                type='text'
-                name='message'
-                value={message ?? ''}
-                placeholder='input message'
-                onChange={handleChange}
-              />
-              <button type='submit'>send</button>
-            </form>
+            <SendMessage onSend={handleSendMessage} />
           </section>
         </>
       )}
