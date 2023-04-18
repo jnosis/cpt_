@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { ChatInfo, RoomInfo } from '../types';
 
 type RoomCardProps = {
@@ -5,10 +6,17 @@ type RoomCardProps = {
 };
 
 export default function RoomCard(
-  { room: { title, users, chats } }: RoomCardProps,
+  { room: { id, title, users, chats } }: RoomCardProps,
 ) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log(id);
+    navigate(`/room/${id}`);
+  };
+
   return (
-    <li>
+    <li onClick={handleClick}>
       <h3>{title}</h3>
       <span>{users.map((user) => user.username).join(', ')}</span>
       <span>{getLastChat(chats)}</span>
