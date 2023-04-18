@@ -24,7 +24,7 @@ export default function RoomCard(
   );
 }
 
-function getLastChat(chats: ChatInfo[]) {
-  const lastChat = chats.findLast((chat) => !!chat);
+function getLastChat(chats?: ChatInfo[]) {
+  const lastChat = (chats ?? []).at(-1);
   return lastChat?.message ?? '';
 }
