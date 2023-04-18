@@ -1,4 +1,4 @@
-import { ChatInfo } from '../types';
+import type { ChatInfo } from '../types';
 
 type ChatBubbleProps = {
   chat: ChatInfo;

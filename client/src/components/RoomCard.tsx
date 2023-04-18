@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChatInfo, RoomInfo } from '../types';
+import type { ChatInfo, RoomInfo } from '../types';
 
 type RoomCardProps = {
   room: RoomInfo;
