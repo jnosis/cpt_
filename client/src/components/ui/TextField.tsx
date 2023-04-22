@@ -7,7 +7,7 @@ type InputFieldProps = {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-export default function InputField(
+export default function TextInputField(
   { name, data, validation, onChange }: InputFieldProps,
 ) {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Validation } from '../../types';
 import Action from './Action';
-import InputField from './InputField';
+import TextInputField from './TextField';
 
 type FormFieldProps<Type> = {
   title: string;
@@ -22,7 +22,7 @@ export default function FormField<Type extends Record<string, string>>(
       <ul className='flex flex-col w-11/12 gap-1 mb-6'>
         {Object.keys(data).map((name, index) => (
           <li key={index}>
-            <InputField
+            <TextInputField
               name={name}
               data={data[name]}
               validation={validation[name]}
