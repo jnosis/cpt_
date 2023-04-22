@@ -1,6 +1,7 @@
 import React from 'react';
+import type { Validation } from '../../types';
 import Action from './Action';
-import { Validation } from '../../types';
+import InputField from './InputField';
 
 type FormFieldProps<Type> = {
   title: string;
@@ -21,26 +22,10 @@ export default function FormField<Type extends Record<string, string>>(
       <ul className='flex flex-col w-11/12 gap-1 mb-6'>
         {Object.keys(data).map((name, index) => (
           <li key={index}>
-            <label
-              className={`text-sm font-bold ${
-                validation[name] ? 'text-slate-600' : 'text-red-500'
-              }`}
-            >
-              {name}
-            </label>
-            <input
-              className={`w-full rounded-sm bg-inherit outline outline-2 ${
-                validation[name] ? 'outline-slate-600' : 'outline-red-600'
-              }`}
-              type={name === 'password'
-                ? 'password'
-                : name === 'email'
-                ? 'email'
-                : 'text'}
+            <InputField
               name={name}
-              value={data[name] ?? ''}
-              placeholder={name}
-              required
+              data={data[name]}
+              validation={validation[name]}
               onChange={onChange}
             />
           </li>
