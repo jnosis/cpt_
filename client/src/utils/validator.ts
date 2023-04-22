@@ -1,6 +1,6 @@
 import type { RoomCreateInfo, SignUpInfo, UserInfo } from '../types';
 
-const MIN_PASSWORD_LEN = 0;
+const MIN_PASSWORD_LEN = 8;
 
 function validateUsername(str: string): boolean {
   return str.length > 0 && !str.includes(' ');
