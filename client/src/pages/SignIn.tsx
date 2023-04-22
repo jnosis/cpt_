@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { LoginInfo, Validation } from '../types';
+import Action from '../components/ui/Action';
 import { useAuthContext } from '../contexts/AuthContext';
 import { validateUser } from '../utils/validator';
 
@@ -92,16 +93,13 @@ export default function SignIn() {
             />
           </li>
         </ul>
-        <button
-          className={`absolute font-medium bottom-2 right-3 rounded-3xl px-3 py-2 ${
-            Object.values(validation).includes(false)
-              ? 'text-slate-400 cursor-not-allowed'
-              : 'text-slate-600 hover:bg-slate-400'
-          }`}
-          type='submit'
-        >
-          Sign in
-        </button>
+        <div className='absolute bottom-2 right-3'>
+          <Action
+            actionType='submit'
+            title='Sign in'
+            isDisable={Object.values(validation).includes(false)}
+          />
+        </div>
       </form>
     </section>
   );
