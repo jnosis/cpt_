@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { RoomCreateInfo, UserInfo, Validation } from '../types';
+import Action from '../components/ui/Action';
+import CheckBoxField from '../components/ui/CheckBoxField';
+import TextInputField from '../components/ui/TextField';
 import { useAuthContext } from '../contexts/AuthContext';
 import useRooms from '../hooks/useRooms';
 import { validateRoom } from '../utils/validator';
@@ -74,37 +77,49 @@ export default function CreateRoom() {
   }, [user]);
 
   return (
-    <>
-      <h1>Create Room</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <input
-            type='text'
+    <section className='flex flex-col justify-center items-center w-full mt-16'>
+      <h1 className='text-5xl text-slate-800 font-bold py-6'>Create Room</h1>
+      <form
+        className='relative flex flex-col items-center w-80 px-6 py-10 rounded-3xl bg-slate-200'
+        onSubmit={handleSubmit}
+      >
+        <div className='flex flex-col w-11/12'>
+          <TextInputField
             name='title'
-            value={roomCreateInfo.title ?? ''}
-            placeholder='title'
-            required
+            data={roomCreateInfo.title}
+            validation={validation.title}
             onChange={handleTitleChange}
           />
         </div>
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>
-              <label>{user.username}</label>
-              <input
-                type='checkbox'
-                name='users'
-                value={user.id}
-                onChange={handleUsersChange}
-              />
-            </li>
-          ))}
-        </ul>
-        <div>
-          <button type='submit'>Create</button>
+        <div className='flex flex-col w-11/12 gap-1 mt-2 mb-1'>
+          <h6
+            className={`text-sm font-bold ${
+              validation.users ? 'text-slate-600' : 'text-red-500'
+            }`}
+          >
+            users
+          </h6>
+          <ul className='px-1'>
+            {users.map((user) => (
+              <li key={user.id}>
+                <CheckBoxField
+                  title={user.username}
+                  name='users'
+                  value={user.id}
+                  onChange={handleUsersChange}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className='absolute bottom-2 right-3'>
+          <Action
+            actionType='submit'
+            title='Create'
+            isDisable={Object.values(validation).includes(false)}
+          />
         </div>
       </form>
-    </>
+    </section>
   );
 }
