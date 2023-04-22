@@ -11,7 +11,6 @@ export default function RoomCard(
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log(id);
     navigate(`/room/${id}`);
   };
 
