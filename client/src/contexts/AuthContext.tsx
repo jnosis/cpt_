@@ -25,7 +25,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  getList: async () => [],
+  getList: () => Promise.resolve([]),
   signup: async () => {},
   login: async () => {},
   logout: async () => {},
