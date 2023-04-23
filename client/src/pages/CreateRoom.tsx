@@ -4,6 +4,7 @@ import type { RoomCreateInfo, UserInfo, Validation } from '../types';
 import Action from '../components/ui/Action';
 import CheckBoxField from '../components/ui/CheckBoxField';
 import TextInputField from '../components/ui/TextField';
+import Section from '../components/ui/Section';
 import { useAuthContext } from '../contexts/AuthContext';
 import useRooms from '../hooks/useRooms';
 import { validateRoom } from '../utils/validator';
@@ -77,7 +78,7 @@ export default function CreateRoom() {
   }, [user]);
 
   return (
-    <section className='flex flex-col justify-center items-center w-full mt-16'>
+    <Section>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Create Room</h1>
       <form
         className='relative flex flex-col items-center w-80 px-6 py-10 rounded-3xl bg-slate-200'
@@ -120,6 +121,6 @@ export default function CreateRoom() {
           />
         </div>
       </form>
-    </section>
+    </Section>
   );
 }

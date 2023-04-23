@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { SignUpInfo, Validation } from '../types';
 import FormField from '../components/ui/FormField';
+import Section from '../components/ui/Section';
 import { useAuthContext } from '../contexts/AuthContext';
 import { validateUser } from '../utils/validator';
 
@@ -49,7 +50,7 @@ export default function SignUp() {
   }, [user]);
 
   return (
-    <section className='flex flex-col justify-center items-center w-full mt-16'>
+    <Section>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Sign Up</h1>
       <FormField
         title='Sign Up'
@@ -58,6 +59,6 @@ export default function SignUp() {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
-    </section>
+    </Section>
   );
 }

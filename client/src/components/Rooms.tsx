@@ -3,6 +3,7 @@ import useRooms from '../hooks/useRooms';
 import NoRoomCard from './NoRoomCard';
 import RoomCard from './RoomCard';
 import Action from './ui/Action';
+import Section from './ui/Section';
 
 export default function Rooms() {
   const { roomsQuery: { data: rooms } } = useRooms();
@@ -13,7 +14,7 @@ export default function Rooms() {
   };
 
   return (
-    <section className='flex flex-col justify-center items-center w-full'>
+    <Section>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Rooms</h1>
       <div className='relative w-2/3 p-10 rounded-3xl bg-slate-200'>
         <ul className='flex flex-col gap-2 w-full mb-4'>
@@ -30,6 +31,6 @@ export default function Rooms() {
           />
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
