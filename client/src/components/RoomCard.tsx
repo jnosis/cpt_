@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { ChatInfo, RoomInfo } from '../types';
+import Card from './ui/Card';
 
 type RoomCardProps = {
   room: RoomInfo;
@@ -15,10 +16,7 @@ export default function RoomCard(
   };
 
   return (
-    <li
-      className='flex flex-col gap-1 w-full px-4 py-3 rounded-xl bg-slate-300'
-      onClick={handleClick}
-    >
+    <Card onClick={handleClick}>
       <header className='flex justify-between'>
         <h3 className='font-semibold text-slate-700'>{title}</h3>
         <span className='text-slate-700'>
@@ -26,7 +24,7 @@ export default function RoomCard(
         </span>
       </header>
       <span className='text-slate-600'>{getLastChat(chats)}</span>
-    </li>
+    </Card>
   );
 }
 
