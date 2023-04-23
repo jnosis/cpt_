@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { RoomCreateInfo, UserInfo, Validation } from '~/types';
 import Action from '~/components/ui/Action';
+import ArticleCard from '~/components/ui/ArticleCard';
 import CheckBoxField from '~/components/ui/CheckBoxField';
 import TextInputField from '~/components/ui/TextField';
 import Section from '~/components/ui/Section';
@@ -80,47 +81,49 @@ export default function CreateRoom() {
   return (
     <Section>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Create Room</h1>
-      <form
-        className='relative flex flex-col items-center w-80 px-6 py-10 rounded-3xl bg-slate-200'
-        onSubmit={handleSubmit}
-      >
-        <div className='flex flex-col w-11/12'>
-          <TextInputField
-            name='title'
-            data={roomCreateInfo.title}
-            validation={validation.title}
-            onChange={handleTitleChange}
-          />
-        </div>
-        <div className='flex flex-col w-11/12 gap-1 mt-2 mb-1'>
-          <h6
-            className={`text-sm font-bold ${
-              validation.users ? 'text-slate-600' : 'text-red-500'
-            }`}
-          >
-            users
-          </h6>
-          <ul className='px-1'>
-            {users.map((user) => (
-              <li key={user.id}>
-                <CheckBoxField
-                  title={user.username}
-                  name='users'
-                  value={user.id}
-                  onChange={handleUsersChange}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className='absolute bottom-2 right-3'>
-          <Action
-            actionType='submit'
-            title='Create'
-            isDisable={Object.values(validation).includes(false)}
-          />
-        </div>
-      </form>
+      <ArticleCard className='relative w-80 px-6 py-10'>
+        <form
+          className='flex flex-col items-center'
+          onSubmit={handleSubmit}
+        >
+          <div className='flex flex-col w-11/12'>
+            <TextInputField
+              name='title'
+              data={roomCreateInfo.title}
+              validation={validation.title}
+              onChange={handleTitleChange}
+            />
+          </div>
+          <div className='flex flex-col w-11/12 gap-1 mt-2 mb-1'>
+            <h6
+              className={`text-sm font-bold ${
+                validation.users ? 'text-slate-600' : 'text-red-500'
+              }`}
+            >
+              users
+            </h6>
+            <ul className='px-1'>
+              {users.map((user) => (
+                <li key={user.id}>
+                  <CheckBoxField
+                    title={user.username}
+                    name='users'
+                    value={user.id}
+                    onChange={handleUsersChange}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='absolute bottom-2 right-3'>
+            <Action
+              actionType='submit'
+              title='Create'
+              isDisable={Object.values(validation).includes(false)}
+            />
+          </div>
+        </form>
+      </ArticleCard>
     </Section>
   );
 }
