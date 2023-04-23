@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import useRooms from '../hooks/useRooms';
-import NoRoomCard from './NoRoomCard';
-import RoomCard from './RoomCard';
-import Action from './ui/Action';
-import Section from './ui/Section';
+import Action from '~/components/ui/Action';
+import Section from '~/components/ui/Section';
+import NoRoomCard from '~/components/NoRoomCard';
+import RoomCard from '~/components/RoomCard';
+import useRooms from '~/hooks/useRooms';
 
 export default function Rooms() {
   const { roomsQuery: { data: rooms } } = useRooms();

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { LoginInfo, Validation } from '../types';
-import FormField from '../components/ui/FormField';
-import Section from '../components/ui/Section';
-import { useAuthContext } from '../contexts/AuthContext';
-import { validateUser } from '../utils/validator';
+import type { LoginInfo, Validation } from '~/types';
+import FormField from '~/components/ui/FormField';
+import Section from '~/components/ui/Section';
+import { useAuthContext } from '~/contexts/AuthContext';
+import { validateUser } from '~/utils/validator';
 
 type LoginInfoValidation = Validation<LoginInfo>;
 

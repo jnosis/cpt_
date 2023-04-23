@@ -13,7 +13,7 @@ import type {
   LoginInfo,
   SignUpInfo,
   UserInfo,
-} from '../types';
+} from '~/types';
 
 type AuthContextType = {
   user: AuthToken | null;

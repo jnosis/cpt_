@@ -1,6 +1,6 @@
-import type { RoomInfo } from '../types';
-import ChatBubble from './ChatBubble';
-import SendMessage from './SendMessage';
+import type { RoomInfo } from '~/types';
+import ChatBubble from '~/components/ChatBubble';
+import SendMessage from '~/components/SendMessage';
 
 type ChatListProps = {
   userId: string;

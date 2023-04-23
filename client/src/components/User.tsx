@@ -1,4 +1,4 @@
-import type { AuthToken } from '../types';
+import type { AuthToken } from '~/types';
 
 type UserProps = {
   user: Omit<AuthToken, 'token'>;

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import ChatList from '../components/ChatList';
-import { useAuthContext } from '../contexts/AuthContext';
-import useRooms from '../hooks/useRooms';
+import ChatList from '~/components/ChatList';
+import { useAuthContext } from '~/contexts/AuthContext';
+import useRooms from '~/hooks/useRooms';
 
 export default function Room() {
   const { id } = useParams();

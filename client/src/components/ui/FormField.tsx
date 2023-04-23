@@ -1,7 +1,7 @@
 import React from 'react';
-import type { Validation } from '../../types';
-import Action from './Action';
-import TextInputField from './TextField';
+import type { Validation } from '~/types';
+import Action from '~/components/ui/Action';
+import TextInputField from '~/components/ui/TextField';
 
 type FormFieldProps<Type> = {
   title: string;

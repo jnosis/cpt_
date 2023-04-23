@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { RoomCreateInfo } from '../types';
-import RoomApi from '../api/room';
-import HttpClient from '../networks/http';
+import type { RoomCreateInfo } from '~/types';
+import RoomApi from '~/api/room';
+import HttpClient from '~/networks/http';
 
 const roomApi = new RoomApi(new HttpClient(import.meta.env.VITE_SERVER_URL));
 

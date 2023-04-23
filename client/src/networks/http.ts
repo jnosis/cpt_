@@ -1,4 +1,4 @@
-import type { IHttpClient } from '../types';
+import type { IHttpClient } from '~/types';
 
 export default class HttpClient implements IHttpClient {
   #baseUrl: string;

@@ -5,7 +5,7 @@ import type {
   LoginInfo,
   SignUpInfo,
   UserInfo,
-} from '../types';
+} from '~/types';
 
 export default class AuthApi implements IAuthApi {
   #http: IHttpClient;

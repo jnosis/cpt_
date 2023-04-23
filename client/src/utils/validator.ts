@@ -1,4 +1,4 @@
-import type { RoomCreateInfo, SignUpInfo, UserInfo } from '../types';
+import type { RoomCreateInfo, SignUpInfo, UserInfo } from '~/types';
 
 const MIN_PASSWORD_LEN = 8;
 

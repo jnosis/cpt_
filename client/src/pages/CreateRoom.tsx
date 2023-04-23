@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { RoomCreateInfo, UserInfo, Validation } from '../types';
-import Action from '../components/ui/Action';
-import CheckBoxField from '../components/ui/CheckBoxField';
-import TextInputField from '../components/ui/TextField';
-import Section from '../components/ui/Section';
-import { useAuthContext } from '../contexts/AuthContext';
-import useRooms from '../hooks/useRooms';
-import { validateRoom } from '../utils/validator';
+import type { RoomCreateInfo, UserInfo, Validation } from '~/types';
+import Action from '~/components/ui/Action';
+import CheckBoxField from '~/components/ui/CheckBoxField';
+import TextInputField from '~/components/ui/TextField';
+import Section from '~/components/ui/Section';
+import { useAuthContext } from '~/contexts/AuthContext';
+import useRooms from '~/hooks/useRooms';
+import { validateRoom } from '~/utils/validator';
 
 type RoomInfoValidation = Validation<RoomCreateInfo>;
 

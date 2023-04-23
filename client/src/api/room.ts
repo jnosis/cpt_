@@ -4,7 +4,7 @@ import type {
   IRoomApi,
   RoomCreateInfo,
   RoomInfo,
-} from '../types';
+} from '~/types';
 
 export default class RoomApi implements IRoomApi {
   #http: IHttpClient;
