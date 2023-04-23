@@ -16,7 +16,7 @@ export default function Rooms() {
   return (
     <Section>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Rooms</h1>
-      <div className='relative w-2/3 p-10 rounded-3xl bg-slate-200'>
+      <div className='relative w-80 sm:w-2/3 max-w-xl min-w-max p-10 rounded-3xl bg-slate-200'>
         <ul className='flex flex-col gap-2 w-full mb-4'>
           {!rooms?.length
             ? <NoRoomCard />
