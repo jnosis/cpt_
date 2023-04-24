@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Action from '~/components/ui/Action';
 
 type SendMessageProps = {
   onSend(message: string): void;
@@ -21,15 +22,20 @@ export default function SendMessage({ onSend }: SendMessageProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      className='flex w-[90vw] sm:w-[36rem] mt-2 px-4 py-2 rounded-full bg-slate-200'
+      autoComplete='off'
+      onSubmit={handleSubmit}
+    >
       <input
+        className='flex-1 px-3 py-2 focus:outline-none bg-inherit'
         type='text'
         name='message'
         value={message ?? ''}
         placeholder='input message'
         onChange={handleChange}
       />
-      <button type='submit'>send</button>
+      <Action actionType='submit' title='send' isDisable={!message.length} />
     </form>
   );
 }
