@@ -43,6 +43,7 @@ export const isAuth = async (
       });
     }
     req.body.userId = user.id;
+    req.body.username = user.username;
     req.body.token = token;
     next();
   } catch (_e) {

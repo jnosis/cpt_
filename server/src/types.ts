@@ -54,6 +54,7 @@ export type Sentiment = 'positive' | 'negative' | 'neutral';
 export type ChatData = {
   roomId: string;
   userId: string;
+  username: string;
   message: string;
   sentiment: Sentiment;
   created_at: string;
@@ -113,6 +114,7 @@ export interface RoomModel extends Model<RoomSchema, RoomCreateData, RoomData> {
   send(
     roomId: string,
     userId: string,
+    username: string,
     chat: { message: string; sentiment: Sentiment },
   ): Promise<ChatData | undefined>;
 }

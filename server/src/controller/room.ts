@@ -126,8 +126,13 @@ export class RoomController implements IRoomController {
   send = async (req: OpineRequest, res: OpineResponse<ChatData>) => {
     const { method, baseUrl } = req;
     const roomId = req.params.id;
-    const { userId, chat } = req.body;
-    const sent = await this.#roomRepository.send(roomId, userId, chat);
+    const { userId, username, chat } = req.body;
+    const sent = await this.#roomRepository.send(
+      roomId,
+      userId,
+      username,
+      chat,
+    );
 
     const msg = convertToMessage({
       method,

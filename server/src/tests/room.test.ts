@@ -252,6 +252,7 @@ describe('Room APIs', () => {
       const chat: Omit<ChatData, 'created_at'> = {
         roomId: room.id,
         userId: user.id,
+        username: user.username,
         message: faker.lorem.sentence(),
         sentiment: 'neutral',
       };
@@ -262,12 +263,14 @@ describe('Room APIs', () => {
       const {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       } = response.body;
       const sent = {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       };
@@ -282,6 +285,7 @@ describe('Room APIs', () => {
       const chat: Omit<ChatData, 'created_at'> = {
         roomId: room.id,
         userId: user.id,
+        username: user.username,
         message: 'love you',
         sentiment: 'positive',
       };
@@ -292,12 +296,14 @@ describe('Room APIs', () => {
       const {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       } = response.body;
       const sent = {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       };
@@ -312,6 +318,7 @@ describe('Room APIs', () => {
       const chat: Omit<ChatData, 'created_at'> = {
         roomId: room.id,
         userId: user.id,
+        username: user.username,
         message: 'hate you',
         sentiment: 'negative',
       };
@@ -322,12 +329,14 @@ describe('Room APIs', () => {
       const {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       } = response.body;
       const sent = {
         roomId,
         userId,
+        username,
         message,
         sentiment,
       };

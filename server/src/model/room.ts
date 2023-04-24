@@ -56,6 +56,7 @@ class RoomRepository implements RoomModel {
   async send(
     roomId: string,
     userId: string,
+    username: string,
     chat: { message: string; sentiment: Sentiment },
   ) {
     const { message, sentiment } = chat;
@@ -64,6 +65,7 @@ class RoomRepository implements RoomModel {
         chats: {
           roomId,
           userId,
+          username,
           message,
           sentiment,
           created_at: (new Date()).toISOString(),
