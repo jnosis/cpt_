@@ -23,7 +23,7 @@ export default function RoomCard(
           {users.map((user) => user.username).join(', ')}
         </span>
       </header>
-      <span className='text-slate-600'>{getLastChat(chats)}</span>
+      <span className='text-slate-500 line-clamp-1'>{getLastChat(chats)}</span>
     </Card>
   );
 }
