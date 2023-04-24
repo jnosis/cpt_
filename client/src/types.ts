@@ -41,6 +41,7 @@ export type Sentiment = 'positive' | 'negative' | 'neutral';
 export type ChatInfo = {
   roomId: string;
   userId: string;
+  username: string;
   message: string;
   sentiment: Sentiment;
   created_at: string;
