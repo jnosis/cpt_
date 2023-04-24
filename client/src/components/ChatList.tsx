@@ -1,14 +1,12 @@
 import type { RoomInfo } from '~/types';
 import ChatBubble from '~/components/ChatBubble';
-import SendMessage from '~/components/SendMessage';
 
 type ChatListProps = {
   userId: string;
   room: RoomInfo;
-  onSend(message: string): void;
 };
 
-export default function ChatList({ userId, room, onSend }: ChatListProps) {
+export default function ChatList({ userId, room }: ChatListProps) {
   return (
     <section>
       <ul>
@@ -20,7 +18,6 @@ export default function ChatList({ userId, room, onSend }: ChatListProps) {
           />
         ))}
       </ul>
-      <SendMessage onSend={onSend} />
     </section>
   );
 }

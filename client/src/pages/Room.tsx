@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatList from '~/components/ChatList';
+import SendMessage from '~/components/SendMessage';
 import { useAuthContext } from '~/contexts/AuthContext';
 import useRooms from '~/hooks/useRooms';
 
@@ -27,11 +28,8 @@ export default function Room() {
             <h2>{room.title}</h2>
             <button onClick={handleBack}>Back</button>
           </header>
-          <ChatList
-            userId={user?.userId ?? ''}
-            room={room}
-            onSend={handleSendMessage}
-          />
+          <ChatList userId={user?.userId ?? ''} room={room} />
+          <SendMessage onSend={handleSendMessage} />
         </>
       )}
     </>
