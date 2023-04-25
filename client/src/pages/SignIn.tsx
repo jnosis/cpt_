@@ -46,7 +46,7 @@ export default function SignIn() {
   }, [user]);
 
   return (
-    <Section>
+    <Section className='px-4'>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Login</h1>
       <FormField
         title='Sign In'

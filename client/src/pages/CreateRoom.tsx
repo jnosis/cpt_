@@ -79,9 +79,11 @@ export default function CreateRoom() {
   }, [user]);
 
   return (
-    <Section>
-      <h1 className='text-5xl text-slate-800 font-bold py-6'>Create Room</h1>
-      <ArticleCard className='relative w-80 px-6 py-10'>
+    <Section className='px-4'>
+      <h1 className='text-5xl text-center text-slate-800 font-bold py-6'>
+        Create Room
+      </h1>
+      <ArticleCard className='relative w-full max-w-xs px-6 py-10'>
         <form
           className='flex flex-col items-center'
           onSubmit={handleSubmit}

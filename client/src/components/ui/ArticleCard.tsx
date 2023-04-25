@@ -7,7 +7,7 @@ type ArticleCardProps = React.PropsWithChildren & {
 export default function ArticleCard({ children, className }: ArticleCardProps) {
   return (
     <article
-      className={`rounded-3xl bg-slate-200${className ? ` ${className}` : ''}`}
+      className={`rounded-3xl bg-slate-200 ${className}`}
     >
       {children}
     </article>

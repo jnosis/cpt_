@@ -16,7 +16,7 @@ export default function FormField<Type extends Record<string, string>>(
   { title, data, validation, onSubmit, onChange }: FormFieldProps<Type>,
 ) {
   return (
-    <ArticleCard className='relative w-80 px-6 py-10'>
+    <ArticleCard className='relative w-full max-w-xs px-6 py-10'>
       <form className='flex justify-center w-full' onSubmit={onSubmit}>
         <ul className='flex flex-col w-11/12 gap-1 mb-6'>
           {Object.keys(data).map((name, index) => (

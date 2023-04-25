@@ -50,7 +50,7 @@ export default function SignUp() {
   }, [user]);
 
   return (
-    <Section>
+    <Section className='px-4'>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Sign Up</h1>
       <FormField
         title='Sign Up'

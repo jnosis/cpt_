@@ -1,8 +1,14 @@
 import React from 'react';
 
-export default function Section({ children }: React.PropsWithChildren) {
+type SectionProps = React.PropsWithChildren & {
+  className?: string;
+};
+
+export default function Section({ children, className }: SectionProps) {
   return (
-    <section className='flex flex-col justify-center items-center w-full'>
+    <section
+      className={`flex flex-col justify-center items-center w-full ${className}`}
+    >
       {children}
     </section>
   );

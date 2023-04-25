@@ -15,9 +15,9 @@ export default function Rooms() {
   };
 
   return (
-    <Section>
+    <Section className='px-[5vw]'>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Rooms</h1>
-      <ArticleCard className='relative w-[90vw] sm:w-[36rem] p-10'>
+      <ArticleCard className='relative w-full max-w-xl p-10'>
         <ul className='flex flex-col gap-2 w-full mb-4'>
           {!rooms?.length
             ? <NoRoomCard />

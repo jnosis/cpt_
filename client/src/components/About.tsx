@@ -3,9 +3,9 @@ import Section from '~/components/ui/Section';
 
 export default function About() {
   return (
-    <Section>
+    <Section className='w-full px-4 sm:px-10 md:px-32 lg:px-48 xl:px-60 2xl:px-80'>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>About</h1>
-      <ArticleCard className='w-[90vw] sm:w-[36rem] mt-2 p-8 text-3xl text-slate-600'>
+      <ArticleCard className='mt-2 p-8 text-3xl text-slate-600'>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
