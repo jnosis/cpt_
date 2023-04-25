@@ -18,7 +18,7 @@ export default function Rooms() {
     <Section className='px-[5vw]'>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Rooms</h1>
       <ArticleCard className='relative w-full max-w-xl p-10'>
-        <ul className='flex flex-col gap-2 w-full mb-4'>
+        <ul className='flex flex-col gap-2 w-full mb-4 max-h-[65vh] overflow-y-scroll scrollbar-none'>
           {!rooms?.length
             ? <NoRoomCard />
             : rooms.map((room) => <RoomCard key={room.id} room={room} />)}
