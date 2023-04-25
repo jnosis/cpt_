@@ -15,7 +15,7 @@ export default function Action(
       className={`font-medium rounded-3xl px-3 py-2 ${
         isDisable
           ? 'text-slate-400 cursor-not-allowed'
-          : 'text-slate-600 hover:bg-slate-400'
+          : 'text-slate-600 hover:bg-slate-300'
       }`}
       type={actionType}
       onClick={onClick}

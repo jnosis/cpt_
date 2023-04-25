@@ -21,7 +21,7 @@ export default function ChatList({ userId, room: { chats } }: ChatListProps) {
   }, [chats]);
 
   return (
-    <ArticleCard className='flex justify-center w-[90vw] sm:w-[36rem] h-[70vh]'>
+    <ArticleCard className='flex justify-center w-full max-w-xl h-[70vh]'>
       <ul
         ref={ref}
         className='flex flex-col gap-2 p-6 overflow-y-auto scrollbar-none'

@@ -23,12 +23,12 @@ export default function SendMessage({ onSend }: SendMessageProps) {
 
   return (
     <form
-      className='flex w-[90vw] sm:w-[36rem] mt-2 px-4 py-2 rounded-full bg-slate-200'
+      className='flex w-full max-w-xl mt-2 px-4 py-2 rounded-full bg-slate-200'
       autoComplete='off'
       onSubmit={handleSubmit}
     >
       <input
-        className='flex-1 px-3 py-2 focus:outline-none bg-inherit'
+        className='flex-auto px-3 py-2 focus:outline-none bg-inherit'
         type='text'
         name='message'
         value={message ?? ''}

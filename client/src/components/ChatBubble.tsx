@@ -13,7 +13,9 @@ export default function ChatBubble({ chat, isSender }: ChatBubbleProps) {
     <li
       className={`flex justify-end ${isSender ? '' : 'flex-row-reverse '}gap-1`}
     >
-      <div className={`rounded-xl px-4 py-2 max-w-[70%] sm:max-w-[50%] ${color}`}>
+      <div
+        className={`rounded-xl px-4 py-2 max-w-[70%] sm:max-w-[50%] ${color}`}
+      >
         {chat.message}
       </div>
       <User user={{ userId: chat.userId, username: chat.username }} />
