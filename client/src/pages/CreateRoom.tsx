@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import type { RoomCreateInfo, UserInfo, Validation } from '~/types';
 import Action from '~/components/ui/Action';
 import ArticleCard from '~/components/ui/ArticleCard';
@@ -80,6 +81,9 @@ export default function CreateRoom() {
 
   return (
     <Section className='px-4'>
+      <Helmet>
+        <title>Create Room | CPT</title>
+      </Helmet>
       <h1 className='text-5xl text-center text-slate-800 font-bold py-6'>
         Create Room
       </h1>

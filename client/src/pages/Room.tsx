@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Section from '~/components/ui/Section';
 import ChatList from '~/components/ChatList';
 import SendMessage from '~/components/SendMessage';
@@ -25,6 +26,9 @@ export default function Room() {
     <>
       {room && (
         <Section className='px-4'>
+          <Helmet>
+            <title>{`${room.title} - Chat Room | CPT`}</title>
+          </Helmet>
           <header className='flex items-center w-full max-w-xl h-16 pl-3 gap-4'>
             <button
               className='text-3xl w-10 h-10 pb-1 rounded-full text-slate-700 hover:bg-slate-300'

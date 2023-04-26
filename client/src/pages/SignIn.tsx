@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import type { LoginInfo, Validation } from '~/types';
 import FormField from '~/components/ui/FormField';
 import Section from '~/components/ui/Section';
@@ -47,6 +48,9 @@ export default function SignIn() {
 
   return (
     <Section className='px-4'>
+      <Helmet>
+        <title>Sign In | CPT</title>
+      </Helmet>
       <h1 className='text-5xl text-slate-800 font-bold py-6'>Login</h1>
       <FormField
         title='Sign In'
