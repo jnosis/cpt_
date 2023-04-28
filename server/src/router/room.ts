@@ -21,7 +21,7 @@ const validateChat = validate({
   message: z.string().min(1, { message: 'Message should be not empty' }),
 });
 
-export default function authRouter(roomController: IRoomController) {
+export default function roomRouter(roomController: IRoomController) {
   router.get('/', isAuth, roomController.getList);
   router.get('/:id', isAuth, isInRoom, roomController.getById);
   router.post('/', isAuth, validateRoom, roomController.create);
