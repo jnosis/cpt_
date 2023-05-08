@@ -7,8 +7,8 @@ type CardProps = React.PropsWithChildren & {
 export default function Card({ children, onClick }: CardProps) {
   return (
     <li
-      className={`flex flex-col gap-1 w-full px-4 py-3 rounded-xl bg-slate-300${
-        onClick ? ' cursor-pointer' : ''
+      className={`group flex flex-col gap-1 w-full px-4 py-3 rounded-xl bg-slate-300${
+        onClick ? ' cursor-pointer hover:bg-gray-300' : ''
       }`}
       onClick={onClick}
     >

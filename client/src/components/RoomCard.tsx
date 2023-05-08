@@ -18,12 +18,16 @@ export default function RoomCard(
   return (
     <Card onClick={handleClick}>
       <header className='flex justify-between'>
-        <h3 className='font-semibold text-slate-700'>{title}</h3>
-        <span className='text-slate-700'>
+        <h3 className='font-semibold text-slate-700 group-hover:text-grey-700'>
+          {title}
+        </h3>
+        <span className='text-slate-700 group-hover:text-grey-700'>
           {users.map((user) => user.username).join(', ')}
         </span>
       </header>
-      <span className='text-slate-500 line-clamp-1'>{getLastChat(chats)}</span>
+      <span className='text-slate-500 group-hover:text-grey-500 line-clamp-1'>
+        {getLastChat(chats)}
+      </span>
     </Card>
   );
 }
