@@ -7,7 +7,7 @@ type SectionProps = React.PropsWithChildren & {
 export default function Section({ children, className }: SectionProps) {
   return (
     <section
-      className={`flex flex-col justify-center items-center w-full ${className}`}
+      className={`flex flex-col justify-center items-center ${className}`}
     >
       {children}
     </section>
