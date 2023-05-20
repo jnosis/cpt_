@@ -11,8 +11,10 @@ import { convertToMessage } from '~/util/message.ts';
 
 export class RoomController implements IRoomController {
   #roomRepository: RoomModel;
+  #sseResponses: Record<string, OpineResponse>;
   constructor(roomRepository: RoomModel) {
     this.#roomRepository = roomRepository;
+    this.#sseResponses = {};
   }
 
   getList = async (
@@ -141,5 +143,23 @@ export class RoomController implements IRoomController {
     });
     log.debug(msg);
     res.setStatus(201).json(sent);
+  };
+
+  connect = (req: OpineRequest, res: OpineResponse) => {
+    const { method, originalUrl } = req;
+    const id = req.body.userId;
+
+    const msg = convertToMessage({
+      method,
+      baseUrl: originalUrl,
+      status: 200,
+      message: `user(${id}) is connected...`,
+    });
+    log.info(msg);
+    res
+      .setHeader('Content-Type', 'text/event-stream')
+      .setHeader('Cache-Control', 'no-cache')
+      .setHeader('Connection', 'keep-alive');
+    this.#sseResponses[id] = res;
   };
 }

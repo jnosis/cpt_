@@ -126,4 +126,5 @@ export interface IRoomController {
   update: RequestHandler<ParamsDictionary, RoomData>;
   delete: RequestHandler;
   send: RequestHandler<ParamsDictionary, ChatData>;
+  connect: RequestHandler;
 }
