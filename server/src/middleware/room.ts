@@ -39,5 +39,6 @@ export const isInRoom = async (
       ...AUTH_ERROR,
     });
   }
+  if (!req.body.users) req.body.users = [...room.users];
   next();
 };
