@@ -4,6 +4,7 @@ import type {
   IRoomController,
   RoomData,
   RoomModel,
+  UserData,
 } from '~/types.ts';
 import { throwError } from '~/middleware/error_handler.ts';
 import log from '~/util/logger.ts';
@@ -128,7 +129,7 @@ export class RoomController implements IRoomController {
   send = async (req: OpineRequest, res: OpineResponse<ChatData>) => {
     const { method, baseUrl } = req;
     const roomId = req.params.id;
-    const { userId, username, chat } = req.body;
+    const { userId, username, users, chat } = req.body;
     const sent = await this.#roomRepository.send(
       roomId,
       userId,
@@ -139,9 +140,15 @@ export class RoomController implements IRoomController {
     const msg = convertToMessage({
       method,
       baseUrl,
+      param: roomId,
       status: 201,
     });
     log.debug(msg);
+    (users as UserData[]).filter((user) => user.id !== userId).forEach((user) =>
+      this.#sseResponses[user.id]?.setStatus(200).send(
+        `event:send\ndata:{'id':'${roomId}'}\n\n`,
+      )
+    );
     res.setStatus(201).json(sent);
   };
 
