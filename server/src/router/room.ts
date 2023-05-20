@@ -23,6 +23,7 @@ const validateChat = validate({
 
 export default function roomRouter(roomController: IRoomController) {
   router.get('/', isAuth, roomController.getList);
+  router.get('/connect', isAuth, roomController.connect);
   router.get('/:id', isAuth, isInRoom, roomController.getById);
   router.post('/', isAuth, validateRoom, roomController.create);
   router.post(
