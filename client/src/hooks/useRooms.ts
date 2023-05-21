@@ -1,24 +1,29 @@
+import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { RoomCreateInfo } from '~/types';
 import RoomApi from '~/api/room';
+import { useAuthContext } from '~/contexts/AuthContext';
 import HttpClient from '~/networks/http';
 
-const roomApi = new RoomApi(new HttpClient(import.meta.env.VITE_SERVER_URL));
+const baseUrl = import.meta.env.VITE_SERVER_URL;
+
+const roomApi = new RoomApi(new HttpClient(baseUrl));
 
 export default function useRooms() {
   const queryClient = useQueryClient();
+  const { user } = useAuthContext();
 
   const roomsQuery = useQuery(
     ['rooms'],
     async () => await roomApi.getList(),
-    { staleTime: 1000 * 60 },
+    { staleTime: Infinity },
   );
 
   const roomQuery = (id: string) =>
     useQuery(
       ['rooms', id],
       async () => await roomApi.getRoom(id),
-      { staleTime: 1000 * 60 },
+      { staleTime: Infinity },
     );
 
   const createRoom = useMutation(
@@ -62,6 +67,36 @@ export default function useRooms() {
       },
     },
   );
+
+  useEffect(() => {
+    if (user) {
+      const eventSource = new EventSource(
+        `${baseUrl}/api/room/connect`,
+        { withCredentials: true },
+      );
+
+      eventSource.onopen = () => {
+        console.log('connected');
+      };
+
+      ['create', 'update', 'delete', 'send'].forEach((type) =>
+        eventSource.addEventListener(type, invalidateQueriesByEvent)
+      );
+
+      return () => {
+        ['create', 'update', 'delete', 'send'].forEach((type) =>
+          eventSource.removeEventListener(type, invalidateQueriesByEvent)
+        );
+        eventSource.close();
+      };
+    }
+  }, [user, queryClient]);
+
+  const invalidateQueriesByEvent = (event: MessageEvent) => {
+    console.log(event.type);
+    queryClient.invalidateQueries(['rooms']);
+    queryClient.invalidateQueries(['rooms', event.data.id]);
+  };
 
   return {
     roomsQuery,
