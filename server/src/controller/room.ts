@@ -18,10 +18,7 @@ export class RoomController implements IRoomController {
     this.#sseResponses = {};
   }
 
-  getList = async (
-    req: OpineRequest,
-    res: OpineResponse<RoomData[]>,
-  ) => {
+  getList = async (req: OpineRequest, res: OpineResponse<RoomData[]>) => {
     const { method, baseUrl } = req;
     const userId = req.body.userId;
     const rooms = await this.#roomRepository.getAll(userId);
@@ -30,6 +27,7 @@ export class RoomController implements IRoomController {
       method,
       baseUrl,
       status: 200,
+      message: `by user(${userId})`,
     });
     log.debug(msg);
     res.setStatus(200).json(rooms);
@@ -38,6 +36,7 @@ export class RoomController implements IRoomController {
   getById = async (req: OpineRequest, res: OpineResponse<RoomData>) => {
     const { method, baseUrl } = req;
     const id = req.params.id;
+    const { userId } = req.body;
     const room = await this.#roomRepository.findById(id);
 
     if (!room) {
@@ -54,6 +53,7 @@ export class RoomController implements IRoomController {
       baseUrl,
       param: id,
       status: 200,
+      message: `by user(${userId})`,
     });
     log.debug(msg);
     res.setStatus(200).json(room);
@@ -68,6 +68,7 @@ export class RoomController implements IRoomController {
       method,
       baseUrl,
       status: 201,
+      message: `room(${room?.id}) is created`,
     });
     log.debug(msg);
     room?.users.filter((user) => user.id !== userId).forEach((user) =>
@@ -98,6 +99,7 @@ export class RoomController implements IRoomController {
       baseUrl,
       param: id,
       status: 200,
+      message: `by user(${userId})`,
     });
     log.debug(msg);
     room.users.filter((user) => user.id !== userId).forEach((user) =>
@@ -128,6 +130,7 @@ export class RoomController implements IRoomController {
       baseUrl,
       param: id,
       status: 204,
+      message: `by user(${userId})`,
     });
     log.debug(msg);
     room.users.filter((user) => user.id !== userId).forEach((user) =>
@@ -152,6 +155,7 @@ export class RoomController implements IRoomController {
       baseUrl,
       param: roomId,
       status: 201,
+      message: `by user(${userId})`,
     });
     log.debug(msg);
     (users as UserData[]).filter((user) => user.id !== userId).forEach((user) =>

@@ -61,6 +61,7 @@ export class UserController implements IUserController {
       method,
       baseUrl: originalUrl,
       status: 201,
+      message: `user(${userId}) sign up`,
     });
     log.debug(msg);
 
@@ -95,6 +96,7 @@ export class UserController implements IUserController {
       method,
       baseUrl: originalUrl,
       status: 200,
+      message: `user(${user.id}) is login`,
     });
     log.debug(msg);
 
