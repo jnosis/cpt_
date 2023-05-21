@@ -61,7 +61,7 @@ export class RoomController implements IRoomController {
 
   create = async (req: OpineRequest, res: OpineResponse<RoomData>) => {
     const { method, baseUrl } = req;
-    const { title, users } = req.body;
+    const { title, users, userId } = req.body;
     const room = await this.#roomRepository.create({ title, users });
 
     const msg = convertToMessage({
@@ -70,17 +70,20 @@ export class RoomController implements IRoomController {
       status: 201,
     });
     log.debug(msg);
+    room?.users.filter((user) => user.id !== userId).forEach((user) =>
+      this.#emitServerSentEvent(user.id, 'create', room.id)
+    );
     res.setStatus(201).json(room);
   };
 
   update = async (req: OpineRequest, res: OpineResponse<RoomData>) => {
     const { method, baseUrl } = req;
     const id = req.params.id;
-    const { title, users } = req.body;
+    const { title, users, userId } = req.body;
     const room = await this.#roomRepository.findById(id);
 
     if (!room) {
-      throwError({
+      return throwError({
         method,
         baseUrl,
         param: id,
@@ -97,16 +100,20 @@ export class RoomController implements IRoomController {
       status: 200,
     });
     log.debug(msg);
-    res.setStatus(200).json(updated);
+    room.users.filter((user) => user.id !== userId).forEach((user) =>
+      this.#emitServerSentEvent(user.id, 'update', id)
+    );
+    return res.setStatus(200).json(updated);
   };
 
   delete = async (req: OpineRequest, res: OpineResponse) => {
     const { method, baseUrl } = req;
+    const { userId } = req.body;
     const id = req.params.id;
     const room = await this.#roomRepository.findById(id);
 
     if (!room) {
-      throwError({
+      return throwError({
         method,
         baseUrl,
         param: id,
@@ -123,7 +130,10 @@ export class RoomController implements IRoomController {
       status: 204,
     });
     log.debug(msg);
-    res.setStatus(204).end();
+    room.users.filter((user) => user.id !== userId).forEach((user) =>
+      this.#emitServerSentEvent(user.id, 'delete', id)
+    );
+    return res.setStatus(204).end();
   };
 
   send = async (req: OpineRequest, res: OpineResponse<ChatData>) => {
