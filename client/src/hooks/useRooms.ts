@@ -30,8 +30,7 @@ export default function useRooms() {
     (room: RoomCreateInfo) => roomApi.create(room),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['rooms']);
-        queryClient.invalidateQueries(['rooms', data.id]);
+        invalidateQueries(data.id);
       },
     },
   );
@@ -41,8 +40,7 @@ export default function useRooms() {
       roomApi.update(updated.id, updated.room),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['rooms']);
-        queryClient.invalidateQueries(['rooms', data.id]);
+        invalidateQueries(data.id);
       },
     },
   );
@@ -51,8 +49,7 @@ export default function useRooms() {
     (id: string) => roomApi.remove(id),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['rooms']);
-        queryClient.invalidateQueries(['rooms', data]);
+        invalidateQueries(data);
       },
     },
   );
@@ -62,8 +59,7 @@ export default function useRooms() {
       roomApi.sendChat(sendInfo.roomId, sendInfo.message),
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(['rooms']);
-        queryClient.invalidateQueries(['rooms', data.roomId]);
+        invalidateQueries(data.roomId);
       },
     },
   );
@@ -92,10 +88,14 @@ export default function useRooms() {
     }
   }, [user, queryClient]);
 
+  const invalidateQueries = (id: string) => {
+    queryClient.invalidateQueries(['rooms']);
+    queryClient.invalidateQueries(['rooms', id]);
+  };
+
   const invalidateQueriesByEvent = (event: MessageEvent) => {
     console.log(event.type);
-    queryClient.invalidateQueries(['rooms']);
-    queryClient.invalidateQueries(['rooms', event.data.id]);
+    invalidateQueries(event.data.id);
   };
 
   return {
