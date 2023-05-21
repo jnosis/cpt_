@@ -145,9 +145,7 @@ export class RoomController implements IRoomController {
     });
     log.debug(msg);
     (users as UserData[]).filter((user) => user.id !== userId).forEach((user) =>
-      this.#sseResponses[user.id]?.setStatus(200).send(
-        `event:send\ndata:{'id':'${roomId}'}\n\n`,
-      )
+      this.#emitServerSentEvent(user.id, 'send', roomId)
     );
     res.setStatus(201).json(sent);
   };
@@ -169,4 +167,16 @@ export class RoomController implements IRoomController {
       .setHeader('Connection', 'keep-alive');
     this.#sseResponses[id] = res;
   };
+
+  #emitServerSentEvent(userId: string, type: string, roomId: string) {
+    log.info(convertToMessage({
+      method: 'SSE',
+      baseUrl: `/api/connect/${userId}`,
+      status: 200,
+      message: `${type.toUpperCase()} ${roomId}`,
+    }));
+    this.#sseResponses[userId]?.setStatus(200).send(
+      `event:${type}\ndata:{'id':'${roomId}'}\n\n`,
+    );
+  }
 }
