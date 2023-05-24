@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import type { RoomCreateInfo } from '~/types';
 import RoomApi from '~/api/room';
 import { useAuthContext } from '~/contexts/AuthContext';
@@ -14,6 +14,7 @@ export default function useRooms() {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const roomsQuery = useQuery(
     ['rooms'],
@@ -77,6 +78,17 @@ export default function useRooms() {
         console.log('connected');
       };
 
+      const eventListener = (event: MessageEvent) => {
+        console.log(event.type);
+        const id = event.data;
+        if (event.type === 'delete') {
+          removeQueries(id);
+          if (location.pathname.includes(id)) navigate('/', { replace: true });
+        } else {
+          invalidateQueries(id);
+        }
+      };
+
       ['create', 'update', 'delete', 'send'].forEach((type) =>
         eventSource.addEventListener(type, eventListener)
       );
@@ -88,7 +100,7 @@ export default function useRooms() {
         eventSource.close();
       };
     }
-  }, [user, queryClient]);
+  }, [user, queryClient, location]);
 
   const invalidateQueries = (id: string) => {
     queryClient.invalidateQueries(['rooms']);
@@ -98,16 +110,6 @@ export default function useRooms() {
   const removeQueries = (id: string) => {
     queryClient.invalidateQueries(['rooms']);
     queryClient.removeQueries(['rooms', id]);
-  };
-
-  const eventListener = (event: MessageEvent) => {
-    console.log(event.type);
-    if (event.type === 'delete') {
-      navigate('/', { replace: true });
-      removeQueries(event.data.id);
-    } else {
-      invalidateQueries(event.data.id);
-    }
   };
 
   return {
