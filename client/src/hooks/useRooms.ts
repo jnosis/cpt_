@@ -51,7 +51,7 @@ export default function useRooms() {
     (id: string) => roomApi.remove(id),
     {
       onSuccess: (data) => {
-        invalidateQueries(data);
+        removeQueries(data);
       },
     },
   );
@@ -78,12 +78,12 @@ export default function useRooms() {
       };
 
       ['create', 'update', 'delete', 'send'].forEach((type) =>
-        eventSource.addEventListener(type, invalidateQueriesByEvent)
+        eventSource.addEventListener(type, eventListener)
       );
 
       return () => {
         ['create', 'update', 'delete', 'send'].forEach((type) =>
-          eventSource.removeEventListener(type, invalidateQueriesByEvent)
+          eventSource.removeEventListener(type, eventListener)
         );
         eventSource.close();
       };
@@ -95,10 +95,19 @@ export default function useRooms() {
     queryClient.invalidateQueries(['rooms', id]);
   };
 
-  const invalidateQueriesByEvent = (event: MessageEvent) => {
+  const removeQueries = (id: string) => {
+    queryClient.invalidateQueries(['rooms']);
+    queryClient.removeQueries(['rooms', id]);
+  };
+
+  const eventListener = (event: MessageEvent) => {
     console.log(event.type);
-    if (event.type === 'delete') navigate('/', { replace: true });
-    invalidateQueries(event.data.id);
+    if (event.type === 'delete') {
+      navigate('/', { replace: true });
+      removeQueries(event.data.id);
+    } else {
+      invalidateQueries(event.data.id);
+    }
   };
 
   return {
