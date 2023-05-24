@@ -190,7 +190,7 @@ export class RoomController implements IRoomController {
       message: `${type.toUpperCase()} ${roomId}`,
     }));
     this.#sseResponses[userId]?.setStatus(200).send(
-      `event:${type}\ndata:{'id':'${roomId}'}\n\n`,
+      `event:${type}\ndata:${roomId}\n\n`,
     );
   }
 }
