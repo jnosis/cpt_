@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import type { RoomCreateInfo } from '~/types';
 import RoomApi from '~/api/room';
 import { useAuthContext } from '~/contexts/AuthContext';
@@ -12,6 +13,7 @@ const roomApi = new RoomApi(new HttpClient(baseUrl));
 export default function useRooms() {
   const queryClient = useQueryClient();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const roomsQuery = useQuery(
     ['rooms'],
@@ -95,6 +97,7 @@ export default function useRooms() {
 
   const invalidateQueriesByEvent = (event: MessageEvent) => {
     console.log(event.type);
+    if (event.type === 'delete') navigate('/', { replace: true });
     invalidateQueries(event.data.id);
   };
 
