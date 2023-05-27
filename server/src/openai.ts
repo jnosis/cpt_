@@ -19,6 +19,14 @@ const openAi = {
   async classifyModeration(text: string) {
     return await client.createModeration(text);
   },
+  async translate(language: string, text: string) {
+    return await client.createCompletion({
+      model: 'text-davinci-003',
+      prompt: `Translate the followings into ${language}\n${text}`,
+      maxTokens: 2048,
+      temperature: 0.3,
+    });
+  },
 };
 
 export default openAi;
