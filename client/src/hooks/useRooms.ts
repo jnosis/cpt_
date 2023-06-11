@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { RoomCreateInfo } from '~/types';
@@ -7,8 +7,8 @@ import { useAuthContext } from '~/contexts/AuthContext';
 import HttpClient from '~/networks/http';
 
 const baseUrl = import.meta.env.VITE_SERVER_URL;
-
-const roomApi = new RoomApi(new HttpClient(baseUrl));
+const translate = localStorage.getItem('translate');
+const roomApi = new RoomApi(new HttpClient(baseUrl, translate));
 
 export default function useRooms() {
   const queryClient = useQueryClient();
@@ -67,6 +67,12 @@ export default function useRooms() {
     },
   );
 
+  const toggleTranslate = (id: string) => {
+    const translate = roomApi.toggleTranslate();
+    invalidateQueries(id);
+    return translate;
+  };
+
   useEffect(() => {
     if (user) {
       const eventSource = new EventSource(
@@ -113,6 +119,7 @@ export default function useRooms() {
   };
 
   return {
+    toggleTranslate,
     roomsQuery,
     roomQuery,
     createRoom,
