@@ -7,8 +7,8 @@ import { useAuthContext } from '~/contexts/AuthContext';
 import HttpClient from '~/networks/http';
 
 const baseUrl = import.meta.env.VITE_SERVER_URL;
-const translate = localStorage.getItem('translate');
-const roomApi = new RoomApi(new HttpClient(baseUrl, translate));
+const translate = localStorage.getItem('translate') === 'true';
+const roomApi = new RoomApi(new HttpClient(baseUrl), translate);
 
 export default function useRooms() {
   const queryClient = useQueryClient();

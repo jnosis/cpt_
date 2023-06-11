@@ -58,7 +58,7 @@ export default class RoomApi implements IRoomApi {
 
   toggleTranslate(): boolean {
     this.#translate = !this.#translate;
-    localStorage.setItem('translate', this.#translate);
+    localStorage.setItem('translate', JSON.stringify(this.#translate));
     return this.#translate;
   }
 }

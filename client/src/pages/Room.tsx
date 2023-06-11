@@ -28,7 +28,7 @@ export default function Room() {
   };
 
   const handleToggle = () => {
-    setTranslate(toggleTranslate(id));
+    id && setTranslate(toggleTranslate(id));
   };
 
   const handleDelete = () => {
