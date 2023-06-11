@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { MdDelete } from 'react-icons/md';
+import {
+  MdDelete,
+  MdOutlineToggleOff,
+  MdToggleOn,
+  MdTranslate,
+} from 'react-icons/md';
 import Section from '~/components/ui/Section';
 import ChatList from '~/components/ChatList';
 import SendMessage from '~/components/SendMessage';
@@ -10,13 +16,19 @@ import useRooms from '~/hooks/useRooms';
 export default function Room() {
   const { id } = useParams();
   const { user } = useAuthContext();
-  const { roomQuery, deleteRoom, sendMessage } = useRooms();
+  const { roomQuery, deleteRoom, sendMessage, toggleTranslate } = useRooms();
   const { data: room } = roomQuery(id || '');
+
+  const [translate, setTranslate] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleBack = () => {
     navigate('/');
+  };
+
+  const handleToggle = () => {
+    setTranslate(toggleTranslate(id));
   };
 
   const handleDelete = () => {
@@ -43,12 +55,27 @@ export default function Room() {
               {'<'}
             </button>
             <h2 className='text-4xl text-slate-700'>{room.title}</h2>
-            <button
-              className='flex justify-center items-center text-3xl w-10 h-10 pb-1 rounded-full text-slate-700 hover:bg-slate-300'
-              onClick={handleDelete}
-            >
-              <MdDelete />
-            </button>
+            <ul className='flex gap-2'>
+              {user && (
+                <div className='flex text-2xl pb-1 text-slate-700'>
+                  <div className='flex justify-center items-center h-10'>
+                    <MdTranslate />
+                  </div>
+                  <button
+                    className='flex justify-center items-center w-10 h-10 rounded-full hover:bg-slate-300'
+                    onClick={handleToggle}
+                  >
+                    {translate ? <MdToggleOn /> : <MdOutlineToggleOff />}
+                  </button>
+                </div>
+              )}
+              <button
+                className='flex justify-center items-center text-3xl w-10 h-10 pb-1 rounded-full text-slate-700 hover:bg-slate-300'
+                onClick={handleDelete}
+              >
+                <MdDelete />
+              </button>
+            </ul>
           </header>
           <ChatList userId={user?.userId ?? ''} room={room} />
           <SendMessage onSend={handleSendMessage} />
