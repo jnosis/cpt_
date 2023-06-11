@@ -11,7 +11,7 @@ const router = Router();
 const validateRoom = validate({
   title: z.string().min(1, { message: 'Title should be not empty' }),
   users: z.object({
-    id: z.string(),
+    id: z.string().uuid(),
     username: z.string(),
     email: z.string().email(),
   }).array().min(1, { message: 'Users should be at least one' }),
