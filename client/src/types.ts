@@ -34,6 +34,7 @@ export interface IRoomApi {
   update(roomId: string, updated: RoomCreateInfo): Promise<RoomInfo>;
   remove(roomId: string): Promise<string>;
   sendChat(roomId: string, message: string): Promise<ChatInfo>;
+  toggleTranslate(): boolean;
 }
 
 export type Sentiment = 'positive' | 'negative' | 'neutral';

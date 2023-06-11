@@ -8,18 +8,24 @@ import type {
 
 export default class RoomApi implements IRoomApi {
   #http: IHttpClient;
-  constructor(http: IHttpClient) {
+  #translate: boolean;
+  constructor(http: IHttpClient, translate: boolean = false) {
     this.#http = http;
+    this.#translate = translate;
   }
 
   async getList(): Promise<RoomInfo[]> {
-    return await this.#http.fetch<RoomInfo[]>('/api/room', { method: 'GET' });
+    return await this.#http.fetch<RoomInfo[]>(
+      `/api/room${this.#translate ? '?translate=true' : ''}`,
+      { method: 'GET' },
+    );
   }
 
   async getRoom(roomId: string): Promise<RoomInfo | null> {
-    return await this.#http.fetch<RoomInfo | null>(`/api/room/${roomId}`, {
-      method: 'GET',
-    });
+    return await this.#http.fetch<RoomInfo | null>(
+      `/api/room/${roomId}${this.#translate ? '?translate=true' : ''}`,
+      { method: 'GET' },
+    );
   }
 
   async create(room: RoomCreateInfo): Promise<RoomInfo> {
@@ -48,5 +54,11 @@ export default class RoomApi implements IRoomApi {
       method: 'POST',
       body: JSON.stringify({ message }),
     });
+  }
+
+  toggleTranslate(): boolean {
+    this.#translate = !this.#translate;
+    localStorage.setItem('translate', this.#translate);
+    return this.#translate;
   }
 }
